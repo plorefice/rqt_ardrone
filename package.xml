@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>rqt_ardrone</name>
+  <version>0.0.1</version>
+  <description>rqt_ardrone provides a series of GUI plugin exposing AR.Drone functionalities.</description>
+  <maintainer email="pietro.lorefice@gmail.com">Pietro Lorefice</maintainer>
+
+  <license>BSD</license>
+
+  <!-- <url type="website">http://wiki.ros.org/rqt_ardrone_navdata</url> -->
+
+  <author email="pietro.lorefice@gmai.com">Pietro Lorefice</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ardrone_autonomy</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rqt_gui</build_depend>
+  <build_depend>rqt_gui_cpp</build_depend>
+  <run_depend>ardrone_autonomy</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>rqt_gui_cpp</run_depend>
+
+  <export>
+	<rqt_gui plugin="${prefix}/plugin.xml"/>
+  </export>
+  
+</package>

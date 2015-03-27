@@ -1,0 +1,22 @@
+<library path="lib/librqt_ardrone">
+  <class name="rqt_ardrone/Navdata" type="rqt_ardrone::Navdata" base_class_type="rqt_gui_cpp::Plugin">
+    <description>
+      A C++ GUI plugin to visualize navigation data from the AR.Drone in real time.
+    </description>
+    <qtgui>
+      <group>
+        <label>Visualization</label>
+        <icon type="theme">folder</icon>
+        <statustip>Plugins related to visualization.</statustip>
+      </group>
+      <group>
+        <label>AR.Drone</label>
+        <icon type="theme">folder</icon>
+        <statustip>Plugins related to AR.Drone.</statustip>
+      </group>
+      <label>Navdata</label>
+      <icon type="theme">image-x-generic</icon>
+      <statustip>A C++ GUI plugin to visualize navigation data from the AR.Drone in real time.</statustip>
+    </qtgui>
+  </class>
+</library>
