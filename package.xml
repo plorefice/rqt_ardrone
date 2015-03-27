@@ -5,9 +5,9 @@
   <description>rqt_ardrone provides a series of GUI plugin exposing AR.Drone functionalities.</description>
   <maintainer email="pietro.lorefice@gmail.com">Pietro Lorefice</maintainer>
 
-  <license>BSD</license>
+  <license>MIT</license>
 
-  <!-- <url type="website">http://wiki.ros.org/rqt_ardrone_navdata</url> -->
+  <url type="repository">https://github.com/plorefice/rqt_ardrone</url>
 
   <author email="pietro.lorefice@gmai.com">Pietro Lorefice</author>
 
