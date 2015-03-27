@@ -1,7 +1,8 @@
 #ifndef rqt_ardrone__navdata_H
 #define rqt_ardrone__navdata_H
 
-#include "rqt_ardrone/navdata/navball.h"
+#include "navball.h"
+#include "status_panel.h"
 
 #include "ros/ros.h"
 #include "ardrone_autonomy/Navdata.h"
@@ -11,7 +12,6 @@
 #include <QWidget>
 #include <QTimer>
 #include <QGraphicsScene>
-#include <QGraphicsLineItem>
 #include <cmath>
 
 #include <qwt_series_data.h>
@@ -127,7 +127,10 @@ namespace rqt_ardrone
 
 		/* Graphics scenes */
 		QGraphicsScene navballScene_;
+		QGraphicsScene statusPanelScene_;
+
 		Navball navball_;
+		StatusPanel statusPanel_;
 
 		/* Update timer */
 		QTimer replotTimer_;

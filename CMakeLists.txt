@@ -19,11 +19,13 @@ include(${QT_USE_FILE})
 set(rqt_ardrone_SRCS
   src/rqt_ardrone/navdata/navdata.cpp
   src/rqt_ardrone/navdata/navball.cpp
+  src/rqt_ardrone/navdata/status_panel.cpp
 )
 
 set(rqt_ardrone_HDRS
   include/rqt_ardrone/navdata/navdata.h
   include/rqt_ardrone/navdata/navball.h
+  include/rqt_ardrone/navdata/status_panel.h
 )
 
 set(rqt_ardrone_UIS

@@ -84,6 +84,13 @@ void Navdata::initPlugin(qt_gui_cpp::PluginContext& context)
 	ui_.navballView->setStyleSheet("background-color: transparent");
 	ui_.navballView->setScene(&navballScene_);
 
+	/* Setup status panel */
+	statusPanelScene_.addItem(&statusPanel_);
+
+	ui_.statusPanelView->setStyleSheet("background-color: transparent");
+	ui_.statusPanelView->setScene(&statusPanelScene_);
+
+
 	/* Subscribe to the required topics */
 	updateSubscriptions();
 
@@ -159,9 +166,10 @@ void Navdata::update()
 	/* Roll, pitch, yaw */
 	navball_.setRoll(navdata_.rotX);
 	navball_.setPitch(navdata_.rotY);
-	navballScene_.update();
-
 	ui_.yawCompass->setValue(-navdata_.rotZ);
+
+	/* Drone status */
+	statusPanel_.setStatus((StatusPanel::DroneStatus) navdata_.state);
 }
 
 void Navdata::replot()
@@ -171,6 +179,10 @@ void Navdata::replot()
 	replot(ui_.xVelPlot, xVelSamples_);
 	replot(ui_.yVelPlot, yVelSamples_);
 	replot(ui_.zVelPlot, zVelSamples_);
+
+	/* Redraw everything */
+	navballScene_.update();
+	statusPanelScene_.update();
 }
 
 void Navdata::replot(QwtPlot * p, NavdataStampedSamples * s)
