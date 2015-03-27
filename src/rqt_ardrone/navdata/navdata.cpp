@@ -28,31 +28,31 @@ void Navdata::initPlugin(qt_gui_cpp::PluginContext& context)
 	xVelSamples_ = new NavdataStampedSamples(-1000.0, 1000.0);
 	yVelSamples_ = new NavdataStampedSamples(-1000.0, 1000.0);
 	zVelSamples_ = new NavdataStampedSamples(-1000.0, 1000.0);
-
+	
 	altdCurve_.setData(altdSamples_);
 	xVelCurve_.setData(xVelSamples_);
 	yVelCurve_.setData(yVelSamples_);
 	zVelCurve_.setData(zVelSamples_);
-
+	
 	/* Setup plot grids */
 	altdGrid_.setPen(QPen(Qt::darkGray, 0.25, Qt::DashLine));
 	xVelGrid_.setPen(QPen(Qt::darkGray, 0.25, Qt::DashLine));
 	yVelGrid_.setPen(QPen(Qt::darkGray, 0.25, Qt::DashLine));
 	zVelGrid_.setPen(QPen(Qt::darkGray, 0.25, Qt::DashLine));
-
+	
 	/* Setup plots */
 	ui_.altdPlot->setAxisTitle(QwtPlot::yLeft, "Altitude (mm)");
 	altdCurve_.attach(ui_.altdPlot);
 	altdGrid_.attach(ui_.altdPlot);
-
+	
 	ui_.xVelPlot->setAxisTitle(QwtPlot::yLeft, "X Velocity (mm/s)");
 	xVelCurve_.attach(ui_.xVelPlot);
 	xVelGrid_.attach(ui_.xVelPlot);
-
+	
 	ui_.yVelPlot->setAxisTitle(QwtPlot::yLeft, "Y Velocity (mm/s)");
 	yVelCurve_.attach(ui_.yVelPlot);
 	yVelGrid_.attach(ui_.yVelPlot);
-
+	
 	ui_.zVelPlot->setAxisTitle(QwtPlot::yLeft, "Z Velocity (mm/s)");
 	zVelCurve_.attach(ui_.zVelPlot);
 	zVelGrid_.attach(ui_.zVelPlot);
@@ -64,12 +64,12 @@ void Navdata::initPlugin(qt_gui_cpp::PluginContext& context)
 	ui_.yawCompass->setScaleComponents(QwtAbstractScaleDraw::Backbone | 
 		QwtAbstractScaleDraw::Ticks | QwtAbstractScaleDraw::Labels);
 	ui_.yawCompass->setScaleTicks(0, 0, 3);
-
+	
 	QMap<double, QString> map;
 	for (double d = 0.0; d < 360.0; d += 60.0)
 	{
 		QString label;
-		label.sprintf("%.0f", d);
+		label.sprintf("%.0f", 360.0 - d);
 		map.insert(d, label);
 	}
 	ui_.yawCompass->setLabelMap(map);
@@ -80,13 +80,13 @@ void Navdata::initPlugin(qt_gui_cpp::PluginContext& context)
 
 	/* Setup navball */
 	navballScene_.addItem(&navball_);
-
+	
 	ui_.navballView->setStyleSheet("background-color: transparent");
 	ui_.navballView->setScene(&navballScene_);
-
+	
 	/* Setup status panel */
 	statusPanelScene_.addItem(&statusPanel_);
-
+	
 	ui_.statusPanelView->setStyleSheet("background-color: transparent");
 	ui_.statusPanelView->setScene(&statusPanelScene_);
 
@@ -103,6 +103,9 @@ void Navdata::initPlugin(qt_gui_cpp::PluginContext& context)
 
 void Navdata::shutdownPlugin()
 {
+	/* Shutdown any subscribers / publishers */
+	sub_navdata_.shutdown();
+
 	/* Disconnect all signals */
 	disconnect(this, SIGNAL(navdataChanged()), this, SLOT(update()));
 	disconnect(&replotTimer_, SIGNAL(timeout()), this, SLOT(replot()));
@@ -112,7 +115,7 @@ void Navdata::shutdownPlugin()
 	xVelCurve_.detach();
 	yVelCurve_.detach();
 	zVelCurve_.detach();
-
+	
 	altdGrid_.detach();
 	xVelGrid_.detach();
 	yVelGrid_.detach();
@@ -138,7 +141,7 @@ void Navdata::updateSubscriptions()
 {
 	/* Subscribe to navdata topic */
 	sub_navdata_ = getNodeHandle().subscribe<ardrone_autonomy::Navdata>(
-		"/ardrone/navdata", 10, &Navdata::receiveNavdata, this);
+		"/ardrone/navdata", 1, &Navdata::receiveNavdata, this);
 }
 
 void Navdata::receiveNavdata(ardrone_autonomy::Navdata::ConstPtr const& navdata)
