@@ -20,16 +20,26 @@ set(rqt_ardrone_SRCS
   src/rqt_ardrone/navdata/navdata.cpp
   src/rqt_ardrone/navdata/navball.cpp
   src/rqt_ardrone/navdata/status_panel.cpp
+
+  src/rqt_ardrone/commands/commands.cpp
 )
 
 set(rqt_ardrone_HDRS
   include/rqt_ardrone/navdata/navdata.h
   include/rqt_ardrone/navdata/navball.h
   include/rqt_ardrone/navdata/status_panel.h
+
+  include/rqt_ardrone/commands/commands.h
 )
 
 set(rqt_ardrone_UIS
   src/rqt_ardrone/navdata/navdata.ui
+
+  src/rqt_ardrone/commands/commands.ui
+)
+
+set(rqt_ardrone_QRC
+  resources/resources.qrc
 )
 
 set(rqt_ardrone_INCLUDE_DIRECTORIES
@@ -43,9 +53,9 @@ set(rqt_ardrone_INCLUDE_DIRECTORIES
 ###################################
 
 catkin_package(
-  INCLUDE_DIRS ${rqt_ardrone_INCLUDE_DIRECTORIES}
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS ardrone_autonomy roscpp rqt_gui rqt_gui_cpp
+#  INCLUDE_DIRS ${rqt_ardrone_INCLUDE_DIRECTORIES}
+#  LIBRARIES ${PROJECT_NAME}
+#  CATKIN_DEPENDS ardrone_autonomy roscpp rqt_gui rqt_gui_cpp
 )
 
 ###########
@@ -60,6 +70,10 @@ qt4_wrap_ui(rqt_ardrone_UIS_H
   ${rqt_ardrone_UIS}
 )
 
+qt4_add_resources(rqt_ardrone_QRC_RCC
+  ${rqt_ardrone_QRC}
+)
+
 include_directories(
   ${rqt_ardrone_INCLUDE_DIRECTORIES}
   ${catkin_INCLUDE_DIRS}
@@ -70,6 +84,7 @@ add_library(${PROJECT_NAME}
   ${rqt_ardrone_SRCS}
   ${rqt_ardrone_MOCS}
   ${rqt_ardrone_UIS_H}
+  ${rqt_ardrone_QRC_RCC}
 )
 
 ## Specify libraries to link a library or executable target against

@@ -1,0 +1,11 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file>landing-icon.png</file>
+    <file>take-off-icon.png</file>
+    <file>reset-icon.png</file>
+    <file>trim-icon.png</file>
+    <file>stop-icon.png</file>
+    <file>wifi-icon.png</file>
+    <file>switch-camera-icon.png</file>
+</qresource>
+</RCC>

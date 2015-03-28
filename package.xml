@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>rqt_ardrone</name>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <description>rqt_ardrone provides a series of GUI plugin exposing AR.Drone functionalities.</description>
   <maintainer email="pietro.lorefice@gmail.com">Pietro Lorefice</maintainer>
 
